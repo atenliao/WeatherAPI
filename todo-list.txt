@@ -1,0 +1,8 @@
+Build a Weather API
+
+1 get Authentiation from Weather.gov 
+2 translate city  to endpoint {latitude},{longitude}
+3. use endpoint to get city Weather from Weather API,
+4. add city Weather on website an list it. 
+5. search city Weather.
+6. add a img for difference Weather and city
