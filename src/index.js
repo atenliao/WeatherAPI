@@ -58,7 +58,7 @@ const getCityLocation = (city,state)=>{
     // const url = ;
     // console.log(url)
     // let CityLoc = []
-    const API_key = 'AIzaSyAZWvO6Bj5hK2q5gb8_p2jDnbe-COTXcVM'
+    const API_key = 
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}&key=${API_key}`)
     .then(res => res.json())
     .then(geoData=>{
