@@ -1,9 +1,13 @@
 let geo =[]
+let CityObj={
+    city:'',
+    state:''
+}
 document.addEventListener('DOMContentLoaded',()=>{
     let state = 'CA'
     let city = 'San Francisco'
  
-    getCityLocation(city,state)
+    
     // geo.push(getCityLocation(city,state)
     // if(geo[0] != undefined && geo[1] != undefined){
     //     console.log('geometry:'+geo[0])
@@ -11,9 +15,10 @@ document.addEventListener('DOMContentLoaded',()=>{
    
     // 
    ListStates()
-   let getstr = getState()
-   console.log(getstr)
-   document.querySelector('#Display_state').innerText= `we get state ${getstr}`
+//    let getstr =
+    getState()
+//    console.log(getstr)
+//    document.querySelector('#Display_state').innerText= `we get state ${getstr}`
 })
 
 let gridX=11, gridY=12,startTime,endTime
@@ -29,7 +34,7 @@ function getWeather(lat, lng){
       let gridY = e.properties.gridY
       let weatherUrl = `https://api.weather.gov/gridpoints/${gridID}/${gridX},${gridY}/forecast/hourly`
     //   console.log(weatherUrl)
-      let curTime = new Date()
+    //   let curTime = new Date()
       fetch(weatherUrl)
         .then(res=>res.json())
         .then(e=>{
@@ -83,7 +88,7 @@ const getCityLocation = (city,state)=>{
     // const url = ;
     // console.log(url)
     // let CityLoc = []
-    const API_key = 
+    const API_key = ''
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}&key=${API_key}`)
     .then(res => res.json())
     .then(geoData=>{
@@ -101,11 +106,44 @@ const getCityLocation = (city,state)=>{
 
 function ListStates(){
 
-    StatesArray = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+    // StatesArray = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+    cities = [
+        "Los Angeles",
+        "San Diego",
+        "San Jose",
+        "San Francisco",
+        "Fresno",
+        "Sacramento",
+        "Long Beach",
+        "Oakland",
+        "Bakersfield",
+        "Anaheim",
+        "Santa Ana",
+        "Riverside",
+        "Stockton",
+        "Chula Vista",
+        "Irvine",
+        "Fremont",
+        "San Bernardino",
+        "Modesto",
+        "Fontana",
+        "Oxnard",
+        "Moreno Valley",
+        "Huntington Beach",
+        "Glendale",
+        "Santa Clarita",
+        "Garden Grove",
+        "Oceanside",
+        "Rancho Cucamonga",
+        "Santa Rosa",
+        "Ontario",
+        "Elk Grove"
+    ]
+    
     let StateOption =[] 
     let i=0
     const stateName = document.querySelector('#state_name')
-    StatesArray.forEach(state=>{
+    cities.forEach(state=>{
         StateOption[i]=document.createElement('option')
         StateOption[i].value = state
         StateOption[i].innerText= state
@@ -117,13 +155,16 @@ function ListStates(){
 }
 
 function getState(){
-    const selectState = document.querySelector('#state_name')
-    let value
-    selectState.addEventListener('change',(event)=>{
-        value = event.target.value
-        return value
-    // document.querySelector('#Display_state').innerText= `the state is ${event.target.value}  `  
+    const selectCity = document.querySelector('#new_state')
+    let city
+    const state= 'CA'
+    selectCity.addEventListener('change',(event)=>{
+        event.preventDefault()
+        city = event.target.value
+        // return value
+    document.querySelector('#Display_state').innerText= `the state is ${event.target.value}  `  
+    getCityLocation(city,state)
     })
-    console.log(value)
-    return value
+    console.log(city)
+    
 }
