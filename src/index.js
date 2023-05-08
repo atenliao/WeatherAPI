@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     // }
    
     // 
-   
+   ListStates()
+   let getstr = getState()
+   console.log(getstr)
+   document.querySelector('#Display_state').innerText= `we get state ${getstr}`
 })
 
 let gridX=11, gridY=12,startTime,endTime
+
 function getWeather(lat, lng){
     console.log(lat, lng)
     fetch(`https://api.weather.gov/points/${lat},${lng}`)
@@ -23,20 +27,41 @@ function getWeather(lat, lng){
       let gridID = e.properties.gridId
       let gridX = e.properties.gridX
       let gridY = e.properties.gridY
-      fetch(`https://api.weather.gov/gridpoints/${gridID}/${gridX},${gridY}/forecast/hourly`)
+      let weatherUrl = `https://api.weather.gov/gridpoints/${gridID}/${gridX},${gridY}/forecast/hourly`
+    //   console.log(weatherUrl)
+      let curTime = new Date()
+      fetch(weatherUrl)
         .then(res=>res.json())
         .then(e=>{
-            let len = e.properties.periods.length
+            // let len = e.properties.periods.length
             // console.log(e.properties.periods[len-1])
-            startTime = e.properties.periods[len-1].startTime;
-            endTime = e.properties.periods[len-1].endTime;
-            showMyLocaltime()
+            // startTime = e.properties.periods[len-1].startTime;
+            // endTime = e.properties.periods[len-1].endTime;
+            // showMyLocaltime()
+            console.log(e.properties.periods)
+            let index = e.properties.periods.findIndex(findIndex)
+            console.log(index)
+            let WeatherObj = e.properties.periods[index]
+            console.log(WeatherObj.shortForecast)
         })
     })
 
     
 }
 
+function findIndex(element){
+    let curtime = new Date()
+    let StartDate = new Date(element.startTime);
+    let EndDate = new Date(element.endTime);
+    let localStartTime = new Date(StartDate.toLocaleString('en-US',{timeZone:'America/Los_Angeles'}))
+    let localEndTime = new Date(EndDate.toLocaleString('en-US',{timeZone:'America/Los_Angeles'}))
+    console.log("local time: " + curtime +"start time:" + localStartTime+'end time'+ localEndTime)
+    if(curtime >= localStartTime && curtime <= localEndTime){
+        return true
+    }else{
+        return false
+    }
+}
 
 function showMyLocaltime(){
     const localTime = new Date();
@@ -71,4 +96,34 @@ const getCityLocation = (city,state)=>{
         getWeather(geo[0],geo[1])
     })
     
+}
+
+
+function ListStates(){
+
+    StatesArray = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+    let StateOption =[] 
+    let i=0
+    const stateName = document.querySelector('#state_name')
+    StatesArray.forEach(state=>{
+        StateOption[i]=document.createElement('option')
+        StateOption[i].value = state
+        StateOption[i].innerText= state
+        stateName.appendChild(StateOption[i])
+        i++
+    })
+    
+
+}
+
+function getState(){
+    const selectState = document.querySelector('#state_name')
+    let value
+    selectState.addEventListener('change',(event)=>{
+        value = event.target.value
+        return value
+    // document.querySelector('#Display_state').innerText= `the state is ${event.target.value}  `  
+    })
+    console.log(value)
+    return value
 }
