@@ -78,6 +78,12 @@ function ListCitys(){
         "San Diego",
         "San Jose",
         "San Francisco",
+        "Daly City",
+        "San Mateo",
+        "Newark",
+        "San Leandro",
+        "Tracy",
+        "Hayward",
         "Fresno",
         "Sacramento",
         "Long Beach",
@@ -92,6 +98,8 @@ function ListCitys(){
         "Fremont",
         "San Bernardino",
         "Modesto",
+        "Berkeley",
+        "Richmond",
         "Fontana",
         "Oxnard",
         "Moreno Valley",
@@ -102,6 +110,7 @@ function ListCitys(){
         "Oceanside",
         "Rancho Cucamonga",
         "Santa Rosa",
+        "Santa Cruz",
         "Ontario",
         "Elk Grove"
     ]
@@ -155,8 +164,10 @@ function renderWeather(cityWeatherObj, city){
         <img src = ${forecastPhoto} class = 'forecastphoto' style="margin:0 0 0 0" width='60' height='50'>
         <div class="degrees">${cityWeatherObj.temperature} &deg${cityWeatherObj.temperatureUnit}</div>
         <div class="place">${city}</div>
-        <p>${cityWeatherObj.shortForecast}</p>
-        <p>${cityWeatherObj.windSpeed} ${cityWeatherObj.windDirection}<p>
-    `
+        <div class="weather">${cityWeatherObj.shortForecast}</div>
+        <div class="wind">Wind: ${cityWeatherObj.windSpeed} | Direction: ${cityWeatherObj.windDirection}</div>
+        <div class="humidity">Humidity: ${cityWeatherObj.relativeHumidity.value}% </div>
+        <div class=""
+        `
     document.querySelector("#city_collection").appendChild(cityCard)
 }
