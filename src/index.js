@@ -135,51 +135,55 @@ function renderWeather(cityWeatherObj, city){
     const cityCard = document.createElement('div');
     switch(cityWeatherObj.shortForecast){
         case 'Sunny':
-            forecastPhoto = './assets/sun.png'
+            forecastPhoto = './assets/day.svg'
             break;
         case 'Mostly Sunny':
-            forecastPhoto = './assets/suncloud.png'
+            forecastPhoto = './assets/cloudy-day-1.svg'
+            break;
+        case 'Partly Sunny':
+            forecastPhoto = './assets/cloudy-day-2.svg'
+            break;
         case 'Partly Cloudy':
             if (cityWeatherObj.isDaytime){
-                forecastPhoto = './assets/suncloud.png'
+                forecastPhoto = './assets/cloudy-day-2.svg'
             }else{
-                forecastPhoto = './assets/Mooncloud.png'
+                forecastPhoto = './assets/cloudy-night-2.svg'
             }
             
             break;
         case 'Mostly Cloudy':
             if (cityWeatherObj.isDaytime){
-                forecastPhoto = './assets/suncloud.png'
+                forecastPhoto = './assets/cloudy-day-3.svg'
             }else{
-                forecastPhoto = './assets/Mooncloud.png'
+                forecastPhoto = './assets/cloudy-night-3.svg'
             }
             break;
-        case 'cloudy':
+        case 'Cloudy':
             if (cityWeatherObj.isDaytime){
-                forecastPhoto = './assets/suncloud.png'
+                forecastPhoto = './assets/cloudy.svg'
             }else{
-                forecastPhoto = './assets/Mooncloud.png'
+                forecastPhoto = './assets/cloudy.svg'
             }
             break;
         case 'Mostly Clear':
-            forecastPhoto = './assets/Mooncloud.png'
+            forecastPhoto = './assets/cloud-night-1.svg'
             break
         case 'Clear':
-            forecastPhoto = './assets/Moon.png'
+            forecastPhoto = './assets/night.svg'
             break;
         case 'Patchy Drizzle':
             if (cityWeatherObj.isDaytime){
-                forecastPhoto = './assets/suncloud.png'
+                forecastPhoto = './assets/cloud-day-3.svg'
             }else{
-                forecastPhoto = './assets/Mooncloud.png'
+                forecastPhoto = './assets/cloud-night-3.svg'
             }
             break;
     }
     cityCard.className = 'citycard';
     cityCard.innerHTML=`
         
-        <img src = ${forecastPhoto} class = 'forecastphoto' style="margin:0 0 0 0" width='60' height='50'>
-        <div class="degrees">${cityWeatherObj.temperature} &deg${cityWeatherObj.temperatureUnit}</div>
+        
+        <div class="degrees"><img src = ${forecastPhoto} class = 'forecastphoto'  >${cityWeatherObj.temperature}&deg${cityWeatherObj.temperatureUnit}</div>
         <div class="place">${city}</div>
         <div class="weather">${cityWeatherObj.shortForecast}</div>
         <div class="wind">Wind: ${cityWeatherObj.windSpeed} | Direction: ${cityWeatherObj.windDirection}</div>
