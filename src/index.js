@@ -140,13 +140,26 @@ function renderWeather(cityWeatherObj, city){
         case 'Mostly Sunny':
             forecastPhoto = './assets/suncloud.png'
         case 'Partly Cloudy':
-            forecastPhoto = './assets/Mooncloud.png'
+            if (cityWeatherObj.isDaytime){
+                forecastPhoto = './assets/suncloud.png'
+            }else{
+                forecastPhoto = './assets/Mooncloud.png'
+            }
+            
             break;
         case 'Mostly Cloudy':
-            forecastPhoto = './assets/Mooncloud.png'
+            if (cityWeatherObj.isDaytime){
+                forecastPhoto = './assets/suncloud.png'
+            }else{
+                forecastPhoto = './assets/Mooncloud.png'
+            }
             break;
         case 'cloudy':
-            forecastPhoto = './assets/suncloud.png'
+            if (cityWeatherObj.isDaytime){
+                forecastPhoto = './assets/suncloud.png'
+            }else{
+                forecastPhoto = './assets/Mooncloud.png'
+            }
             break;
         case 'Mostly Clear':
             forecastPhoto = './assets/Mooncloud.png'
@@ -155,7 +168,11 @@ function renderWeather(cityWeatherObj, city){
             forecastPhoto = './assets/Moon.png'
             break;
         case 'Patchy Drizzle':
-            forecastPhoto= './assets/Mooncloud.png'
+            if (cityWeatherObj.isDaytime){
+                forecastPhoto = './assets/suncloud.png'
+            }else{
+                forecastPhoto = './assets/Mooncloud.png'
+            }
             break;
     }
     cityCard.className = 'citycard';
