@@ -46,7 +46,7 @@ async function getCityLocation(city,state){
 
         WeatherObj = data.properties.periods[index]
         console.log(WeatherObj.shortForecast)
-        renderWeather(WeatherObj)
+        renderWeather(WeatherObj,city)
     //    getWeather(geo[0],geo[1])
     }catch(error){
         console.error('fetch city data error:',error)
@@ -122,7 +122,7 @@ function ListCitys(){
 
 let forecastPhoto
 
-function renderWeather(cityWeatherObj){
+function renderWeather(cityWeatherObj, city){
     const cityCard = document.createElement('div');
     switch(cityWeatherObj.shortForecast){
         case 'Sunny':
@@ -131,10 +131,10 @@ function renderWeather(cityWeatherObj){
         case 'Mostly Sunny':
             forecastPhoto = './assets/suncloud.png'
         case 'Partly Cloudy':
-            forecastPhoto = './assets/suncloud.png'
+            forecastPhoto = './assets/Mooncloud.png'
             break;
         case 'Mostly Cloudy':
-            forecastPhoto = './assets/Moonloud.png'
+            forecastPhoto = './assets/Mooncloud.png'
             break;
         case 'cloudy':
             forecastPhoto = './assets/suncloud.png'
@@ -144,11 +144,17 @@ function renderWeather(cityWeatherObj){
             break
         case 'Clear':
             forecastPhoto = './assets/Moon.png'
+            break;
+        case 'Patchy Drizzle':
+            forecastPhoto= './assets/Mooncloud.png'
+            break;
     }
     cityCard.className = 'citycard';
     cityCard.innerHTML=`
-        <img src = ${forecastPhoto} class = 'forecastphoto' style="margin:0 0 0 0" width='300' height='200'>
-        <p>${cityWeatherObj.temperature} &deg${cityWeatherObj.temperatureUnit}</p>
+        
+        <img src = ${forecastPhoto} class = 'forecastphoto' style="margin:0 0 0 0" width='60' height='50'>
+        <div class="degrees">${cityWeatherObj.temperature} &deg${cityWeatherObj.temperatureUnit}</div>
+        <div class="place">${city}</div>
         <p>${cityWeatherObj.shortForecast}</p>
         <p>${cityWeatherObj.windSpeed} ${cityWeatherObj.windDirection}<p>
     `
