@@ -1,0 +1,78 @@
+{
+  "weatherCards": [
+    {
+      "city": "San Francisco",
+      "image": "./assets/night.svg",
+      "shortForecast": "Clear",
+      "windSpeed": "14 mph",
+      "windDirection": "W",
+      "temperature": 53,
+      "humidity": 84,
+      "gridId": "MTR",
+      "gridX": 85,
+      "gridY": 105,
+      "idName": "San_Francisco",
+      "id": 1,
+      "count": 91
+    },
+    {
+      "city": "San Diego",
+      "image": "./assets/rainy-4.svg",
+      "shortForecast": "Slight Chance Light Rain",
+      "windSpeed": "15 mph",
+      "windDirection": "W",
+      "temperature": 57,
+      "humidity": 76,
+      "gridId": "SGX",
+      "gridX": 57,
+      "gridY": 14,
+      "idName": "San_Diego",
+      "id": 2,
+      "count": 89
+    },
+    {
+      "city": "Daly City",
+      "image": "./assets/cloudy-night-1.svg",
+      "shortForecast": "Mostly Clear",
+      "windSpeed": "8 mph",
+      "windDirection": "W",
+      "temperature": 50,
+      "humidity": 90,
+      "gridId": "MTR",
+      "gridX": 82,
+      "gridY": 102,
+      "idName": "Daly_City",
+      "id": 3,
+      "count": 79
+    },
+    {
+      "city": "San Leandro",
+      "image": "./assets/cloudy-night-1.svg",
+      "shortForecast": "Mostly Clear",
+      "windSpeed": "7 mph",
+      "windDirection": "WSW",
+      "temperature": 52,
+      "humidity": 88,
+      "gridId": "MTR",
+      "gridX": 93,
+      "gridY": 101,
+      "idName": "San_Leandro",
+      "id": 4,
+      "count": 69
+    },
+    {
+      "city": "San Jose",
+      "image": "./assets/cloudy-night-2.svg",
+      "shortForecast": "Partly Cloudy",
+      "windSpeed": "5 mph",
+      "windDirection": "NNW",
+      "temperature": 51,
+      "humidity": 86,
+      "gridId": "MTR",
+      "gridX": 99,
+      "gridY": 82,
+      "idName": "San_Jose",
+      "id": 5
+    }
+  ]
+}
