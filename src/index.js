@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     showCards()
    ListCitys()
 getCity()
-// setInterval(updateCityWeatherObj,10000)
+setInterval(callFunc,300000)
+// setInterval(showCards,10000)
 //    setInterval(updateCard,10000)
     // CreaterenderWeather(WeatherObj)
 //    console.log(getstr)
@@ -54,17 +55,17 @@ async function getCityLocation(city){
 
         const res = await fetch(`https://api.weather.gov/points/${lat},${lng}`)
         let e = await res.json()
-        console.log(e)
+        // console.log(e)
         let weatherUrl = `https://api.weather.gov/gridpoints/${e.properties.gridId}/${e.properties.gridX},${e.properties.gridY}/forecast/hourly`
         const response = await fetch(weatherUrl)
         let data = await response.json()
-        console.log(data.properties.periods)
+        // console.log(data.properties.periods)
         let index = data.properties.periods.findIndex(findIndex)
 
         let WeatherObj = data.properties.periods[index]
         console.log(WeatherObj.shortForecast)
         CreaterenderWeather(WeatherObj,city,e.properties.gridId,e.properties.gridX,e.properties.gridY)
-    //    getWeather(geo[0],geo[1])
+    
     }catch(error){
         console.error('fetch city data error:',error)
     }
@@ -227,8 +228,8 @@ async function CreaterenderWeather(cityWeatherObj, cityName,GridId,GridX,GridY){
             HaveItem = true
         }
         
-        console.log(HaveItem)
-        console.log(getItem)
+        // console.log(HaveItem)
+        // console.log(getItem)
     }catch (error){
         console.log(error.message)
     }
@@ -243,9 +244,19 @@ async function CreaterenderWeather(cityWeatherObj, cityName,GridId,GridX,GridY){
         gridId: GridId,
         gridX: GridX,
         gridY: GridY,
+        count: 1,
     }
 
     if(HaveItem){
+        
+        getItem.image = forecastPhoto
+        getItem.shortForecast = cityWeatherObj.shortForecast
+        getItem.windSpeed = cityWeatherObj.windSpeed
+        getItem.windDirection = cityWeatherObj.windDirection
+        getItem.temperature = cityWeatherObj.temperature
+        getItem.humidity = cityWeatherObj.relativeHumidity.value
+        getItem.count++
+        console.log('the getItem is:'+getItem.count)
         updateWeatherCard(getItem)
     }else{
         renderWeather(weatherObj)
@@ -254,6 +265,8 @@ async function CreaterenderWeather(cityWeatherObj, cityName,GridId,GridX,GridY){
     }
     
 }
+
+
 
 function renderWeather(weatherObj){
     const cityCard = document.createElement('div');
@@ -271,7 +284,7 @@ function renderWeather(weatherObj){
         <div class="weather">${weatherObj.shortForecast}</div>
         <div class="wind">Wind: ${weatherObj.windSpeed} | Direction: ${weatherObj.windDirection}</div>
         <div class="humidity">Humidity: ${weatherObj.humidity}% </div>
-        <div class-"count">the count is: ${weatherObj.count}</div>
+        <div class="count">the count is: ${weatherObj.count}</div>
         </div>
         `
 
@@ -318,58 +331,33 @@ async function showCards(){
     
 }
 
-async function UpdateBase(TheweatherObj){
-    try{
-        let weatherUrl = `https://api.weather.gov/gridpoints/${TheweatherObj.gridId}/${TheweatherObj.gridX},${TheweatherObj.gridY}/forecast/hourly`
-        const response = await fetch(weatherUrl)
-        let data = await response.json()
+function UpdateddataBase(TheweatherObj){
         let unit = 'F'
-        console.log(data.properties.periods)
-        let index = data.properties.periods.findIndex(findIndex)
-
-        let item = data.properties.periods[index]
-        let image = getphoto(item.shortForecast, item.isDaytime)
-        TheweatherObj.temperature = item.temperature
-        TheweatherObj.image = image
-        TheweatherObj.shortForecast = item.shortForecast
-        TheweatherObj.windSpeed = item.windSpeed
-        TheweatherObj.windDirection = item.windDirection
-        TheweatherObj.humidity = item.humidity
-        TheweatherObj.count++
-
-        updateWeatherCard(TheweatherObj)
-        // console.log(TheweatherObj.city)
         let element = document.querySelector(`#${TheweatherObj.idName}`)
-        console.log('element: '+element.id)
-        const cityId = document.getElementById(element.id)
-        const degree = cityId.getElementsByClassName("degrees")
-        const place = cityId.getElementsByClassName("place")
-        const weather = cityId.getElementsByClassName("weather")
-        const wind = cityId.getElementsByClassName("wind")
-        const humidity = cityId.getElementsByClassName("humidity")
-        const count = cityId.getElementsByClassName("count")
+        console.log('element id: '+element.id)
+        // const cityId = document.querySelector(element.id)
+        // console.log("cityId:",cityId)
+        const degree = element.querySelector(".degrees")
+        const place = element.querySelector(".place")
+        const weather = element.querySelector(".weather")
+        const wind = element.querySelector(".wind")
+        const humidity = element.querySelector(".humidity")
+        const count = element.querySelector(".count")
+        
         // const palce = city_collection.getElementsByClassName("place")
         degree.innerHTML=`<img src = ${TheweatherObj.image} class = 'forecastphoto'  >${TheweatherObj.temperature}&deg${unit}`
-        place.innerHTML=`${TheweatherObj.city}`
-        weather.innerHTML=`${TheweatherObj.shortForecast}`
-        wind.innerHTML = `Wind: ${TheweatherObj.windSpeed} | Direction: ${TheweatherObj.windDirection}`
-        humidity.innerHTML=`Humidity: ${TheweatherObj.humidity}% `
-        count.innerText=`the count is ${TheweatherObj.count}`
-        console.log(count.innerText)
-        console.log(TheweatherObj.count)
-        // element.textContent=`
         
+        weather.textContent=`${TheweatherObj.shortForecast}`
+        wind.textContent = `Wind: ${TheweatherObj.windSpeed} | Direction: ${TheweatherObj.windDirection}`
+        humidity.textContent=`Humidity: ${TheweatherObj.humidity}% `
+
+        count.textContent=`the count is ${TheweatherObj.count}`
+
+        console.log('count:',count.textContent)
+        // console.log('textContent:'+ count.textContent)
+        console.log('The weatherObj count: '+ TheweatherObj.count)
         
-        // <div class="degrees"></div>
-        // <div class="place"></div>
-        // <div class="weather"></div>
-        // <div class="wind"></div>
-        // <div class="humidity"></div>
-        // <div></div>
-        // `
-    }catch(error){
-        console.log(error.message)
-    }
+   
 }
 
 async function updateCard(){
@@ -395,4 +383,18 @@ async function updateCityWeatherObj(){
         console.log(error.message)
     }
     
+}
+
+
+async function callFunc(){
+    updateCityWeatherObj()
+    try{
+        const res = await fetch("http://localhost:3000/weatherCards")
+        let weatherCards = await res.json()
+        console.log('before updated database: ',weatherCards)
+        weatherCards.forEach(card => UpdateddataBase(card))
+    }catch(error){
+        console.log(error.message)
+        
+    }
 }
