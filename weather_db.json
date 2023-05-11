@@ -13,7 +13,7 @@
       "gridX": 99,
       "gridY": 82,
       "color": "#00BFFF",
-      "count": 49,
+      "count": 50,
       "idName": "San_Jose"
     },
     {
@@ -29,7 +29,7 @@
       "gridX": 57,
       "gridY": 14,
       "color": "#00BFFF",
-      "count": 49,
+      "count": 50,
       "idName": "San_Diego"
     },
     {
@@ -45,7 +45,7 @@
       "gridX": 90,
       "gridY": 105,
       "color": "#00BFFF",
-      "count": 34,
+      "count": 35,
       "idName": "Oakland"
     },
     {
@@ -61,7 +61,7 @@
       "gridX": 41,
       "gridY": 68,
       "color": "#00BFFF",
-      "count": 33,
+      "count": 34,
       "idName": "Sacramento"
     },
     {
@@ -77,7 +77,7 @@
       "gridX": 86,
       "gridY": 95,
       "color": "#00BFFF",
-      "count": 30,
+      "count": 31,
       "idName": "San_Mateo"
     },
     {
@@ -93,7 +93,7 @@
       "gridX": 96,
       "gridY": 98,
       "color": "#00BFFF",
-      "count": 31,
+      "count": 32,
       "idName": "Hayward"
     }
   ]

@@ -374,8 +374,7 @@ async function UpdateddataBase(weatherObj) {
     let weatherUrl = `https://api.weather.gov/gridpoints/${weatherObj.gridId}/${weatherObj.gridX},${weatherObj.gridY}/forecast/hourly`
     const response = await fetch(weatherUrl)
     let data = await response.json()
-    // console.log(weatherObj.city)
-    // console.log(data.properties.periods)
+    
     let index = data.properties.periods.findIndex(findIndex)
 
     let WeatherElement = data.properties.periods[index]
@@ -391,7 +390,7 @@ async function UpdateddataBase(weatherObj) {
     weatherObj.humidity = WeatherElement.relativeHumidity.value
     weatherObj.color = color
     weatherObj.count++
-    // console.log(WeatherElement.shortForecast)
+    
     let unit = 'F'
     let element = document.querySelector(`#${weatherObj.idName}`)
     // console.log('element id: ' + element.id)
@@ -408,9 +407,7 @@ async function UpdateddataBase(weatherObj) {
     wind.textContent = `Wind: ${WeatherElement.windSpeed} | Direction: ${WeatherElement.windDirection}`
     humidity.textContent = `Humidity: ${WeatherElement.relativeHumidity.value}% `
     count.innerHTML = `the info updated: ${weatherObj.count} times`
-    // console.log('count:', count.textContent)
-    // console.log('The weatherObj count: ' + WeatherElement.count)
-
+    
 
     updateWeatherCard(weatherObj)
 
@@ -428,7 +425,7 @@ async function updateCard() {
 }
 
 async function callFunc() {
-    // updateCityWeatherObj()
+
     try {
         const res = await fetch("http://localhost:3000/weatherCards")
         let weatherCards = await res.json()
@@ -443,10 +440,8 @@ async function callFunc() {
 
 function SearchCity() {
     let val = document.querySelector('#searchInput').value
-    console.log(val)
     let input = val.toLowerCase()
-    console.log(input)
-    document.getElementById("demo").innerHTML = "The city you search is " + val.value
+    // document.getElementById("demo").innerHTML = "The city you search is " + val.value
     let x = document.getElementsByClassName('citycard')
     // console.log(x)
     for (let i = 0; i < x.length; i++) {
@@ -459,11 +454,5 @@ function SearchCity() {
             x[i].style.display = "none"
         }
     }
-    //    x.forEach()
-    //    x.forEach((item)=>{
-    //     console.log(item)
-    //     // i
-    //    })
 
-    // 
 }
