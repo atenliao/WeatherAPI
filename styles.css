@@ -4,8 +4,11 @@ div.citycard{
     height: 400px;
     border: 1px solid #737373;
     color:burlywood;
-    background: white;
-    margin: 1rem;
+    background: rgb(18, 18, 58);
+    margin-left: 0rem;
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
     padding: 1rem;
     display: inline-grid;
 }
@@ -53,6 +56,7 @@ button{
     top: 0px;
     right: 0px;
     z-index:100;
+    color: darkgreen;
     background: transparent;
     border: 0;
     font-size:large;
@@ -65,4 +69,32 @@ button{
 
 p{
     margin:auto
+}
+
+.select_city{
+    width: fit-content;
+    background-color: #679c12;
+    color: #f2f2f2;
+    text-align: center;
+    float: left;
+    padding: 14px 16px;
+    font-size: 17px;
+}
+.container{
+    overflow: hidden;
+    text-align: center;
+    background-color:#679c12 ;
+    background-position: center;
+}
+
+.container a{
+    float: left;
+    display: block;
+    /* display:inline-block; */
+    color: #f2f2f2;
+    margin-right: 0px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
 }

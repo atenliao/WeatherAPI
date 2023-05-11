@@ -1,6 +1,6 @@
 let geo = []
 // let WeatherObj
-cities = [
+let cities = [
     "Los Angeles",
     "San Diego",
     "San Jose",
@@ -15,7 +15,7 @@ cities = [
     "Sacramento",
     "Long Beach",
     "Oakland",
-    "Bakersfield",
+    "Mountain View",
     "Anaheim",
     "Santa Ana",
     "Riverside",
@@ -74,7 +74,7 @@ function getCity() {
         event.preventDefault()
         city = event.target.value
         // return value
-        document.querySelector('#Display_city').innerText = `the city is ${event.target.value}  `
+        // document.querySelector('#Display_city').innerText = `the city is ${event.target.value}  `
         // document.querySelector('#city_collection').appendChild(city)
         getCityLocation(city)
     })
@@ -91,13 +91,14 @@ async function getCityLocation(city) {
 
         const res = await fetch(`https://api.weather.gov/points/${lat},${lng}`)
         let e = await res.json()
-        // console.log(e)
+        console.log(e)
         let weatherUrl = `https://api.weather.gov/gridpoints/${e.properties.gridId}/${e.properties.gridX},${e.properties.gridY}/forecast/hourly`
         const response = await fetch(weatherUrl)
         let data = await response.json()
         let index = data.properties.periods.findIndex(findIndex)
 
         let WeatherObj = data.properties.periods[index]
+        console.log(WeatherObj)
         console.log(WeatherObj.shortForecast)
         CreaterenderWeather(WeatherObj, city, e.properties.gridId, e.properties.gridX, e.properties.gridY)
 
@@ -393,24 +394,24 @@ async function updateCard() {
 }
 
 
-async function updateCityWeatherObj() {
+// async function updateCityWeatherObj() {
 
-    try {
-        const res = await fetch("http://localhost:3000/weatherCards")
-        let weatherCards = await res.json()
-        console.log(weatherCards)
-        weatherCards.forEach(weatherObj => updateCityWeather(weatherObj))
-    } catch (error) {
-        console.log(error.message)
-    }
+//     try {
+//         const res = await fetch("http://localhost:3000/weatherCards")
+//         let weatherCards = await res.json()
+//         console.log(weatherCards)
+//         weatherCards.forEach(weatherObj => updateCityWeather(weatherObj))
+//     } catch (error) {
+//         console.log(error.message)
+//     }
 
-}
+// }
 
 
 
 
 async function callFunc() {
-    updateCityWeatherObj()
+    // updateCityWeatherObj()
     try {
         const res = await fetch("http://localhost:3000/weatherCards")
         let weatherCards = await res.json()
