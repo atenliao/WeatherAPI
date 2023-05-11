@@ -179,6 +179,15 @@ function getphoto(shortForecast, isDaytime) {
                 color = '#0C1445'
             }
             break;
+        case 'Scatt­erred clouds':
+            if (isDaytime) {
+                forecastPhoto = './assets/cloudy-day-2.svg'
+                color = '#00BFFF'
+            } else {
+                forecastPhoto = './assets/cloudy-night-2.svg'
+                color = '#0C1445'
+            }
+            break
         case 'Cloudy':
             if (cityWeatherObj.isDaytime) {
                 forecastPhoto = './assets/cloudy.svg'
