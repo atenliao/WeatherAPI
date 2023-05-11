@@ -83,7 +83,7 @@ function getCity() {
 }
 async function getCityLocation(city) {
     const state = 'CA'
-    const API_key = ''
+    const API_key = config.key
     try {
         const getres = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}&key=${API_key}`)
         const geoData = await getres.json()
