@@ -4,12 +4,11 @@ div.citycard{
     height: 400px;
     border: 1px solid #737373;
     color:burlywood;
-    background: rgb(18, 18, 58);
     margin-left: 0rem;
     margin-top: 0.5rem;
     margin-right: 1rem;
     margin-bottom: 0.5rem;
-    padding: 1rem;
+    padding: 0px;
     display: inline-grid;
 }
 div.degrees{
