@@ -1,3 +1,7 @@
+div.city_collection{
+    position: fixed;
+    top:60px;
+}
 div.citycard{
     position: relative;
     width: 250px;
@@ -81,14 +85,16 @@ p{
     font-size: 17px;
 }
 .container{
+    width: 97%;
     overflow: hidden;
     text-align: center;
     background-color:#679c12 ;
     background-position: center;
+    position: fixed;
 }
 
 .container a{
-    float: left;
+    float:left;
     display: block;
     /* display:inline-block; */
     color: #f2f2f2;

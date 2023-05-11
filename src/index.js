@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showCards()
     ListCitys()
     getCity()
-    setInterval(callFunc, 300000)
+    setInterval(callFunc, 60000)
     document.querySelector("#searchInput").addEventListener("search", SearchCity)
 })
 
@@ -99,8 +99,8 @@ async function getCityLocation(city) {
         let index = data.properties.periods.findIndex(findIndex)
 
         let WeatherObj = data.properties.periods[index]
-        console.log(WeatherObj)
-        console.log(WeatherObj.shortForecast)
+        // console.log(WeatherObj)
+        // console.log(WeatherObj.shortForecast)
         CreaterenderWeather(WeatherObj, city, e.properties.gridId, e.properties.gridX, e.properties.gridY)
 
     } catch (error) {
