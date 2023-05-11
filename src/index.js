@@ -1,5 +1,46 @@
 let geo = []
 // let WeatherObj
+cities = [
+    "Los Angeles",
+    "San Diego",
+    "San Jose",
+    "San Francisco",
+    "Daly City",
+    "San Mateo",
+    "Newark",
+    "San Leandro",
+    "Tracy",
+    "Hayward",
+    "Fresno",
+    "Sacramento",
+    "Long Beach",
+    "Oakland",
+    "Bakersfield",
+    "Anaheim",
+    "Santa Ana",
+    "Riverside",
+    "Stockton",
+    "Chula Vista",
+    "Irvine",
+    "Fremont",
+    "San Bernardino",
+    "Modesto",
+    "Berkeley",
+    "Richmond",
+    "Fontana",
+    "Oxnard",
+    "Moreno Valley",
+    "Huntington Beach",
+    "Glendale",
+    "Santa Clarita",
+    "Garden Grove",
+    "Oceanside",
+    "Rancho Cucamonga",
+    "Santa Rosa",
+    "Santa Cruz",
+    "Ontario",
+    "Elk Grove"
+]
 let weatherObj = {
     city: "",
     image: "",
@@ -85,47 +126,7 @@ function findIndex(element) {
 function ListCitys() {
 
     // StatesArray = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
-    cities = [
-        "Los Angeles",
-        "San Diego",
-        "San Jose",
-        "San Francisco",
-        "Daly City",
-        "San Mateo",
-        "Newark",
-        "San Leandro",
-        "Tracy",
-        "Hayward",
-        "Fresno",
-        "Sacramento",
-        "Long Beach",
-        "Oakland",
-        "Bakersfield",
-        "Anaheim",
-        "Santa Ana",
-        "Riverside",
-        "Stockton",
-        "Chula Vista",
-        "Irvine",
-        "Fremont",
-        "San Bernardino",
-        "Modesto",
-        "Berkeley",
-        "Richmond",
-        "Fontana",
-        "Oxnard",
-        "Moreno Valley",
-        "Huntington Beach",
-        "Glendale",
-        "Santa Clarita",
-        "Garden Grove",
-        "Oceanside",
-        "Rancho Cucamonga",
-        "Santa Rosa",
-        "Santa Cruz",
-        "Ontario",
-        "Elk Grove"
-    ]
+    
 
     let CitysOption = []
     let i = 0
@@ -220,13 +221,16 @@ async function CreaterenderWeather(cityWeatherObj, cityName, GridId, GridX, Grid
         if (getItem) {
             HaveItem = true
         }
-
-        // console.log(HaveItem)
-        // console.log(getItem)
     } catch (error) {
         console.log(error.message)
     }
+
+    let index = cities.findIndex(function(item){
+       return item === cityName
+    })
+    console.log(index)
     weatherObj = {
+        id: index,
         city: cityName,
         image: forecastPhoto,
         shortForecast: cityWeatherObj.shortForecast,
@@ -259,7 +263,7 @@ function renderWeather(weatherObj) {
     let idName = weatherObj.city
     idName = idName.replace(" ", '_')
     weatherObj.idName = idName
-    console.log(idName)
+    
     cityCard.innerHTML = `
         <div id=${idName}>
         <div class="degrees"><img src = ${weatherObj.image} class = 'forecastphoto'  >${weatherObj.temperature}&deg${unit}</div>
@@ -267,27 +271,35 @@ function renderWeather(weatherObj) {
         <div class="weather">${weatherObj.shortForecast}</div>
         <div class="wind">Wind: ${weatherObj.windSpeed} | Direction: ${weatherObj.windDirection}</div>
         <div class="humidity">Humidity: ${weatherObj.humidity}% </div>
-        <div class="count">the count is: ${weatherObj.count}</div>
+        <div class="count">the info updated: ${weatherObj.count} times</div>
         </div>
         <button id="clean" class="clean">x</button>
         `
-
+    cityCard.querySelector("#clean").addEventListener('click',()=>{
+        cityCard.remove()
+        console.log(weatherObj.id)
+        removeCityWeather(weatherObj.id)
+    })
     document.querySelector("#city_collection").appendChild(cityCard)
 }
 
 
-function addWeatherCard(WeatherObj) {
-    fetch("http://localhost:3000/weatherCards", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-        },
-        body: JSON.stringify(WeatherObj)
-    })
-        .then(res => res.json)
-        .then(item => console.log(item))
-        .catch(error => console.log(error.message))
+async function addWeatherCard(WeatherObj) {
+    try{
+     const res= await fetch("http://localhost:3000/weatherCards", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify(WeatherObj)
+        })
+      const item = await res.json()
+      console.log(item)
+    }catch(error){
+        console.log(error.message)
+    }
+    
 
 }
 
@@ -313,6 +325,16 @@ async function showCards() {
         console.log(error.message)
     }
 
+}
+
+async function removeCityWeather(id){
+    await fetch(`http://localhost:3000/weatherCards/${id}`,{
+        method:'DELETE',
+        headers:{
+            "Content-Type":"application/json",
+            Accept:"application/json"
+        }
+    })
 }
 
 async function UpdateddataBase(weatherObj) {
@@ -350,7 +372,7 @@ async function UpdateddataBase(weatherObj) {
     weather.textContent = `${WeatherElement.shortForecast}`
     wind.textContent = `Wind: ${WeatherElement.windSpeed} | Direction: ${WeatherElement.windDirection}`
     humidity.textContent = `Humidity: ${WeatherElement.relativeHumidity.value}% `
-    count.innerHTML = `the count is ${weatherObj.count}`
+    count.innerHTML = `the info updated: ${weatherObj.count} times`
     // console.log('count:', count.textContent)
     // console.log('The weatherObj count: ' + WeatherElement.count)
 

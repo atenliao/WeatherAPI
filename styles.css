@@ -43,6 +43,9 @@ div.humidity{
     text-align: center;
     color: chocolate;
 }
+div.count{
+    text-align: center;
+}
 button{
     position: absolute;
     float: right;
