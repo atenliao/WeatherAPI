@@ -53,15 +53,15 @@ let weatherObj = {
     gridX: 0,
     gridY: 0,
     idName: "",
-    color:"",
+    color: "",
     count: 0
 }
 document.addEventListener('DOMContentLoaded', () => {
     showCards()
     ListCitys()
     getCity()
-    setInterval(callFunc,300000)
-   
+    setInterval(callFunc, 300000)
+    document.querySelector("#searchInput").addEventListener("search", SearchCity)
 })
 
 
@@ -128,7 +128,7 @@ function findIndex(element) {
 function ListCitys() {
 
     // StatesArray = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
-    
+
 
     let CitysOption = []
     let i = 0
@@ -155,19 +155,19 @@ function getphoto(shortForecast, isDaytime) {
             break;
         case 'Mostly Sunny':
             forecastPhoto = './assets/cloudy-day-1.svg'
-            color='#00BFFF'
+            color = '#00BFFF'
             break;
         case 'Partly Sunny':
             forecastPhoto = './assets/cloudy-day-2.svg'
-            color='#00BFFF'
+            color = '#00BFFF'
             break;
         case 'Partly Cloudy':
             if (isDaytime) {
                 forecastPhoto = './assets/cloudy-day-2.svg'
-                color='#00BFFF'
+                color = '#00BFFF'
             } else {
                 forecastPhoto = './assets/cloudy-night-2.svg'
-                color='#0C1445'
+                color = '#0C1445'
             }
             break;
         case 'Mostly Cloudy':
@@ -191,54 +191,54 @@ function getphoto(shortForecast, isDaytime) {
         case 'Cloudy':
             if (cityWeatherObj.isDaytime) {
                 forecastPhoto = './assets/cloudy.svg'
-                color='#87CEFA'
+                color = '#87CEFA'
             } else {
                 forecastPhoto = './assets/cloudy.svg'
-                color='#0C1445'
+                color = '#0C1445'
             }
             break;
         case 'Mostly Clear':
             forecastPhoto = './assets/cloudy-night-1.svg'
-            color='#0C1445'
+            color = '#0C1445'
             break
         case 'Clear':
             forecastPhoto = './assets/night.svg'
-            color='#0C1445'
+            color = '#0C1445'
             break;
         case 'Patchy Drizzle':
             if (isDaytime) {
                 forecastPhoto = './assets/cloud-day-3.svg'
-                color='#D3D3D3'
+                color = '#D3D3D3'
             } else {
                 forecastPhoto = './assets/cloud-night-3.svg'
-                color='#0C1445'
+                color = '#0C1445'
             }
             break;
         case 'Slight Chance Light Rain':
             if (isDaytime) {
                 forecastPhoto = './assets/rainy-2.svg'
-                color='#8290AC'
+                color = '#8290AC'
             } else {
                 forecastPhoto = './assets/rainy-4.svg'
-                color='#0C1445'
+                color = '#0C1445'
             }
             break;
         case 'Rain Showers':
             forecastPhoto = './assets/rainy-7.svg'
-            color='#8C96A1'
+            color = '#8C96A1'
             break;
         case 'Thunderstorms':
             forecastPhoto = './assets/thunder.svg'
-            color='#8C96A1'
+            color = '#8C96A1'
             break;
     }
-    return [forecastPhoto,color]
+    return [forecastPhoto, color]
 }
 
 async function CreaterenderWeather(cityWeatherObj, cityName, GridId, GridX, GridY) {
 
-    let forecastPhoto,color
-    [forecastPhoto,color] = getphoto(cityWeatherObj.shortForecast, cityWeatherObj.isDaytime)
+    let forecastPhoto, color
+    [forecastPhoto, color] = getphoto(cityWeatherObj.shortForecast, cityWeatherObj.isDaytime)
     // console.log(forecastPhoto)
     let HaveItem = false
     let getItem = null
@@ -255,8 +255,8 @@ async function CreaterenderWeather(cityWeatherObj, cityName, GridId, GridX, Grid
         console.log(error.message)
     }
 
-    let index = cities.findIndex(function(item){
-       return item === cityName
+    let index = cities.findIndex(function (item) {
+        return item === cityName
     })
     console.log(index)
     weatherObj = {
@@ -271,12 +271,13 @@ async function CreaterenderWeather(cityWeatherObj, cityName, GridId, GridX, Grid
         gridId: GridId,
         gridX: GridX,
         gridY: GridY,
-        color:color,
+        color: color,
         count: 1,
     }
 
     if (HaveItem) {
-        updateWeatherCard(getItem)
+        weatherObj.count = getItem.count
+        updateWeatherCard(weatherObj)
     } else {
         renderWeather(weatherObj)
         addWeatherCard(weatherObj)
@@ -294,7 +295,7 @@ function renderWeather(weatherObj) {
     let idName = weatherObj.city
     idName = idName.replace(" ", '_')
     weatherObj.idName = idName
-    
+
     cityCard.innerHTML = `
         <div id=${idName}>
         <div class="degrees"><img src = ${weatherObj.image} class = 'forecastphoto'  >${weatherObj.temperature}&deg${unit}</div>
@@ -307,7 +308,7 @@ function renderWeather(weatherObj) {
         <button id="clean" class="clean">x</button>
         `
     cityCard.querySelector(`#${idName}`).style.backgroundColor = weatherObj.color
-    cityCard.querySelector("#clean").addEventListener('click',()=>{
+    cityCard.querySelector("#clean").addEventListener('click', () => {
         cityCard.remove()
         // console.log(weatherObj.id)
         removeCityWeather(weatherObj.id)
@@ -317,8 +318,8 @@ function renderWeather(weatherObj) {
 
 
 async function addWeatherCard(WeatherObj) {
-    try{
-     const res= await fetch("http://localhost:3000/weatherCards", {
+    try {
+        const res = await fetch("http://localhost:3000/weatherCards", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -326,12 +327,12 @@ async function addWeatherCard(WeatherObj) {
             },
             body: JSON.stringify(WeatherObj)
         })
-      const item = await res.json()
-    //   console.log(item)
-    }catch(error){
+        const item = await res.json()
+        //   console.log(item)
+    } catch (error) {
         console.log(error.message)
     }
-    
+
 
 }
 
@@ -359,12 +360,12 @@ async function showCards() {
 
 }
 
-async function removeCityWeather(id){
-    await fetch(`http://localhost:3000/weatherCards/${id}`,{
-        method:'DELETE',
-        headers:{
-            "Content-Type":"application/json",
-            Accept:"application/json"
+async function removeCityWeather(id) {
+    await fetch(`http://localhost:3000/weatherCards/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
         }
     })
 }
@@ -380,8 +381,8 @@ async function UpdateddataBase(weatherObj) {
     let WeatherElement = data.properties.periods[index]
     console.log(WeatherElement)
     // console.log('ShortForecast',WeatherElement.shortForecast)
-    let forecastPhoto,color
-    [forecastPhoto,color] = getphoto(WeatherElement.shortForecast, WeatherElement.isDaytime)
+    let forecastPhoto, color
+    [forecastPhoto, color] = getphoto(WeatherElement.shortForecast, WeatherElement.isDaytime)
     weatherObj.image = forecastPhoto
     weatherObj.shortForecast = WeatherElement.shortForecast
     weatherObj.windSpeed = WeatherElement.windSpeed
@@ -394,7 +395,7 @@ async function UpdateddataBase(weatherObj) {
     let unit = 'F'
     let element = document.querySelector(`#${weatherObj.idName}`)
     // console.log('element id: ' + element.id)
-    element.style.backgroundColor= color
+    element.style.backgroundColor = color
     const degree = element.querySelector(".degrees")
     // const place = element.querySelector(".place")
     const weather = element.querySelector(".weather")
@@ -426,23 +427,6 @@ async function updateCard() {
     }
 }
 
-
-// async function updateCityWeatherObj() {
-
-//     try {
-//         const res = await fetch("http://localhost:3000/weatherCards")
-//         let weatherCards = await res.json()
-//         console.log(weatherCards)
-//         weatherCards.forEach(weatherObj => updateCityWeather(weatherObj))
-//     } catch (error) {
-//         console.log(error.message)
-//     }
-
-// }
-
-
-
-
 async function callFunc() {
     // updateCityWeatherObj()
     try {
@@ -454,4 +438,32 @@ async function callFunc() {
         console.log(error.message)
 
     }
+}
+
+
+function SearchCity() {
+    let val = document.querySelector('#searchInput').value
+    console.log(val)
+    let input = val.toLowerCase()
+    console.log(input)
+    document.getElementById("demo").innerHTML = "The city you search is " + val.value
+    let x = document.getElementsByClassName('citycard')
+    // console.log(x)
+    for (let i = 0; i < x.length; i++) {
+        // i => console.log(i)
+        if (x[i].children[0].children[1].textContent.toLowerCase().includes(input)) {
+            x[i].style.display = "list-item"
+            x[i].style.backgroundColor= x[i].children[0].style.backgroundColor
+            x[i].style.display= "inline-grid"
+        } else {
+            x[i].style.display = "none"
+        }
+    }
+    //    x.forEach()
+    //    x.forEach((item)=>{
+    //     console.log(item)
+    //     // i
+    //    })
+
+    // 
 }
