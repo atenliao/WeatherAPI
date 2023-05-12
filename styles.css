@@ -1,8 +1,8 @@
 div.city_collection{
     position: relative;
     /* top:60px; */
-    right: 1.5%;
-    left: 1.5%;
+    right: 1%;
+    left: 1%;
 }
 div.citycard{
     position: relative;
@@ -41,18 +41,20 @@ div.weather{
     text-align: center;
 }
 div.wind{
-    font-size: 20px;
+    font-size: 19px;
     text-align: center;
+    color: rgb(234, 247, 63);
     
 }
 div.humidity{
     margin-top: 50px;
     font-size: 20px;
     text-align: center;
-    color: chocolate;
+    color: rgb(252, 252, 252);
 }
 div.count{
     text-align: center;
+    color: rgb(245, 106, 8);
 }
 button{
     position: absolute;
@@ -87,14 +89,14 @@ p{
     font-size: 17px;
 }
 .container{
-    width: 97%;
+    width: 97.7%;
     overflow: hidden;
     text-align: center;
     background-color:#679c12 ;
     background-position: center;
     position: relative;
-    left: 1.5%;
-    right: 1.5%;
+    left: 1%;
+    right: 1%;
 }
 
 .container a{

@@ -13,7 +13,7 @@
       "gridX": 96,
       "gridY": 92,
       "color": "#00BFFF",
-      "count": 38,
+      "count": 41,
       "idName": "Newark"
     },
     {
@@ -29,7 +29,7 @@
       "gridX": 37,
       "gridY": 67,
       "color": "#00BFFF",
-      "count": 39,
+      "count": 42,
       "idName": "Anaheim"
     },
     {
@@ -45,7 +45,7 @@
       "gridX": 93,
       "gridY": 86,
       "color": "#00BFFF",
-      "count": 39,
+      "count": 42,
       "idName": "Mountain_View"
     },
     {
@@ -61,7 +61,7 @@
       "gridX": 62,
       "gridY": 76,
       "color": "#00BFFF",
-      "count": 37,
+      "count": 40,
       "idName": "San_Bernardino"
     },
     {
@@ -77,7 +77,7 @@
       "gridX": 99,
       "gridY": 82,
       "color": "#00BFFF",
-      "count": 23,
+      "count": 26,
       "idName": "San_Jose"
     },
     {
@@ -93,24 +93,8 @@
       "gridX": 57,
       "gridY": 14,
       "color": "#00BFFF",
-      "count": 23,
+      "count": 26,
       "idName": "San_Diego"
-    },
-    {
-      "id": 3,
-      "city": "San Francisco",
-      "image": "./assets/cloudy-day-1.svg",
-      "shortForecast": "Mostly Sunny",
-      "windSpeed": "14 mph",
-      "windDirection": "W",
-      "temperature": 61,
-      "humidity": 69,
-      "gridId": "MTR",
-      "gridX": 85,
-      "gridY": 105,
-      "color": "#00BFFF",
-      "count": 24,
-      "idName": "San_Francisco"
     },
     {
       "id": 8,
@@ -125,8 +109,24 @@
       "gridX": 36,
       "gridY": 31,
       "color": "#00BFFF",
-      "count": 23,
+      "count": 26,
       "idName": "Tracy"
+    },
+    {
+      "id": 5,
+      "city": "San Mateo",
+      "image": "./assets/cloudy-day-1.svg",
+      "shortForecast": "Mostly Sunny",
+      "windSpeed": "13 mph",
+      "windDirection": "W",
+      "temperature": 63,
+      "humidity": 66,
+      "gridId": "MTR",
+      "gridX": 86,
+      "gridY": 95,
+      "color": "#00BFFF",
+      "count": 2,
+      "idName": "San_Mateo"
     }
   ]
 }
