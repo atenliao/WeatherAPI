@@ -105,6 +105,8 @@ async function getCityLocation(city) {
 
     } catch (error) {
         console.error('fetch city data error:', error)
+        let msg= document.querySelector(".error_msg")
+        msg.textContent = `Cannot Fetch City ${city} Data`
     }
 
 }
@@ -277,7 +279,9 @@ async function CreaterenderWeather(cityWeatherObj, cityName, GridId, GridX, Grid
 
     if (HaveItem) {
         weatherObj.count = getItem.count
-        updateWeatherCard(weatherObj)
+        let msg= document.querySelector(".error_msg")
+        msg.textContent = `City ${cityName} shown in the site`
+        // updateWeatherCard(weatherObj)
     } else {
         renderWeather(weatherObj)
         addWeatherCard(weatherObj)
