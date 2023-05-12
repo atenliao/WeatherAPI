@@ -106,7 +106,7 @@ async function getCityLocation(city) {
     } catch (error) {
         console.error('fetch city data error:', error)
         let msg= document.querySelector(".error_msg")
-        msg.textContent = `Cannot Fetch City ${city} Data`
+        msg.textContent = `Cannot Fetch City ${city} Data, try other`
     }
 
 }
@@ -280,7 +280,7 @@ async function CreaterenderWeather(cityWeatherObj, cityName, GridId, GridX, Grid
     if (HaveItem) {
         weatherObj.count = getItem.count
         let msg= document.querySelector(".error_msg")
-        msg.textContent = `City ${cityName} shown in the site`
+        msg.textContent = `City ${cityName} shown in the site, add other`
         // updateWeatherCard(weatherObj)
     } else {
         renderWeather(weatherObj)
@@ -360,6 +360,8 @@ async function showCards() {
         weatherCards.forEach(card => renderWeather(card))
     } catch (error) {
         console.log(error.message)
+        let msg= document.querySelector(".error_msg")
+        msg.textContent = `json server is down`
     }
 
 }
