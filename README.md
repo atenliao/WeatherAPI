@@ -41,3 +41,5 @@ Distributed under the MIT License. Please see 'LICENSE.txt' for more infomation
  [contributors-url]: https://github.com/atenliao/WeatherAPP/graphs/contributors
  [forks-shield]: https://img.shields.io/github/forks/atenliao/weatherAPP.svg?style=for-the-badge
  [forks-url]: https://github.com/atenliao/weatherAPP/network/members
+ [license-shield]: https://img.shields.io/github/license/atenliao/weatherAPP.svg?style=for-the-badge
+ [license-url]: https://github.com/atenliao/WeatherAPP/blob/main/LICENSE
