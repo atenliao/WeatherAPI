@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showCards()
     ListCitys()
     getCity()
-    setInterval(callFunc, 60000)
+    setInterval(callFunc, 300000)
     document.querySelector("#searchInput").addEventListener("search", SearchCity)
 })
 
