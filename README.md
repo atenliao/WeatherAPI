@@ -1,7 +1,11 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![MIT License][license-shield]][license-url]
+
 # Weather App
 
 ## Introuction
-This App is California City Weather App. It is collecting weather info from weather API. Any people can choose California city and display city's weather. It includes **Forecast**, **Tempurature**, **Humidity**, **WindSpeed** and **WindDirection**. In the app, we can get realtime weather info from API.
+This App is **California City Weather App**. It is collecting weather info from weather API. Any people can choose California city and display city's weather. It includes **Forecast**, **Tempurature**, **Humidity**, **WindSpeed** and **WindDirection**. In the app, we can get realtime weather info from API.
 
 
 ## feature
@@ -32,3 +36,8 @@ Distributed under the MIT License. Please see 'LICENSE.txt' for more infomation
  * svg: [amCharts](https://www.amcharts.com/)
  * weatherAPI: [weather.gov](https://www.weather.gov/documentation/services-web-api)
  * city map: [citymap](https://developers.google.com/maps/) 
+
+ [contributors-shield]: https://img.shields.io/github/contributors/atenliao/weatherApp.svg?style=for-the-badge
+ [contributors-url]: https://github.com/atenliao/WeatherAPP/graphs/contributors
+ [forks-shield]: https://img.shields.io/github/forks/atenliao/weatherAPP.svg?style=for-the-badge
+ [fork-url]: https://github.com/atenliao/weatherAPP/network/members
